@@ -2,6 +2,7 @@
 //используя битовые операции (число вводится с клавиатуры).
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     int x;
