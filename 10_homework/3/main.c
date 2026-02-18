@@ -58,10 +58,6 @@ int main(void) {
                 printf("Process exited with status %d\n",
                        WEXITSTATUS(status));
             } 
-            else if (WIFSIGNALED(status)) {
-                printf("Process killed by signal %d\n",
-                       WTERMSIG(status));
-            }
         }
     }
     return 0;
