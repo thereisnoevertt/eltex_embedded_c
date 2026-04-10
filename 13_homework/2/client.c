@@ -15,14 +15,12 @@
 
 #include "message.h"
 
-/* ── colour pairs ───────────────────────────────────────────── */
-#define CP_TITLE    1   /* title bar               */
-#define CP_SYSTEM   2   /* join/leave notices      */
-#define CP_SELF     3   /* own messages            */
-#define CP_HISTORY  4   /* replayed history        */
-#define CP_OTHER    5   /* messages from others    */
+#define CP_TITLE    1
+#define CP_SYSTEM   2 
+#define CP_SELF     3 
+#define CP_HISTORY  4
+#define CP_OTHER    5 
 
-/* ── globals ────────────────────────────────────────────────── */
 
 static WINDOW *chat_win  = NULL;
 static WINDOW *input_win = NULL;
@@ -70,7 +68,6 @@ static void ui_append(int colour, int extra_attr,
     pthread_mutex_unlock(&ui_mtx);
 }
 
-/* Decide colour/style based on message type and sender. */
 static void display_message(const Message *msg)
 {
     switch (msg->type) {
@@ -190,8 +187,14 @@ static void ui_init(void)
 
 static void ui_teardown(void)
 {
-    if (input_win) { delwin(input_win); input_win = NULL; }
-    if (chat_win)  { delwin(chat_win);  chat_win  = NULL; }
+    if (input_win) { 
+        delwin(input_win); 
+        input_win = NULL; 
+    }
+    if (chat_win)  { 
+        delwin(chat_win);  
+        chat_win  = NULL; 
+    }
     endwin();
 }
 
@@ -213,6 +216,8 @@ static void mq_cleanup(void)
         my_queue = (mqd_t)-1;
     }
     mq_unlink(my_queue_name);
+
+    pthread_mutex_destroy(&ui_mtx);
 }
 
 
@@ -227,8 +232,9 @@ int main(void)
     fflush(stdout);
     if (!fgets(my_name, NAME_LEN, stdin)) return 1;
     my_name[strcspn(my_name, "\n")] = '\0';
-    if (!my_name[0])
+    if (!my_name[0]){
         strncpy(my_name, "Anonymous", NAME_LEN - 1);
+    }
 
     snprintf(my_queue_name, sizeof(my_queue_name),
              "/client_%d", (int)my_pid);
