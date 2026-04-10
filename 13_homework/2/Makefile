@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Wpedantic -std=c11 -pthread
+CFLAGS = -Wall -Wextra -Wpedantic -std=c99 -pthread
 LDFLAGS = -lncurses -lrt -lpthread
 
 .PHONY: all clean kill-queues
