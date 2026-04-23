@@ -233,7 +233,7 @@ int main(void) {
     printf("Enter your name: ");
     fflush(stdout);
     if (!fgets(my_name, sizeof(my_name), stdin)) {
-        return 1;
+        return EXIT_FAILURE;
     }
     my_name[strcspn(my_name, "\n")] = '\0';
     if (my_name[0] == '\0')
@@ -303,7 +303,7 @@ int main(void) {
         sem_close(mutex_sem);
         sem_close(event_sem);
         munmap(chat, sizeof(shared_chat));
-        return 1;
+        return EXIT_FAILURE;
     }
 
     sem_wait(mutex_sem);

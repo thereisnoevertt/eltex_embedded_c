@@ -2,7 +2,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2 -pthread
 LDFLAGS = -pthread -lrt
 
-# Для клиента добавляем ncurses
 CLIENT_LDFLAGS = -pthread -lrt -lncurses
 
 TARGETS = server client

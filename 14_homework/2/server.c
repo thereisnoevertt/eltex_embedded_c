@@ -139,11 +139,11 @@ int main() {
     int fd = shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666);
     if (fd == -1) {
         perror("shm_open");
-        exit(EXIT_FAILURE);
+        return (EXIT_FAILURE);
     }
     if (ftruncate(fd, sizeof(shared_chat)) == -1) {
         perror("ftruncate");
-        exit(EXIT_FAILURE);
+        return (EXIT_FAILURE);
     }
 
     shared_chat* chat = mmap(NULL, sizeof(shared_chat),
@@ -151,7 +151,7 @@ int main() {
                              MAP_SHARED, fd, 0);
     if (chat == MAP_FAILED) {
         perror("mmap");
-        exit(EXIT_FAILURE);
+        return (EXIT_FAILURE);
     }
 
     close(fd);
