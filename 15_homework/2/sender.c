@@ -8,9 +8,9 @@ int main() {
     printf("Enter receiver PID: ");
     scanf("%d", &receiver_pid);
 
-    // Send SIGUSR1 signal to the receiver process
-    if (kill(receiver_pid, SIGUSR1) == 0) {
-        printf("Sent SIGUSR1 to process %d\n", receiver_pid);
+        // Send SIGINT signal to the receiver process
+    if (kill(receiver_pid, SIGINT) == 0) {
+        printf("Sent SIGINT to process %d\n", receiver_pid);
     }
     else {
         perror("Failed to send signal");
